@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Homework67_Tasks.Data
 {
-   public class TasksRepository
+    public class TasksRepository
     {
         private readonly string _connectionString;
 
@@ -24,7 +24,7 @@ namespace Homework67_Tasks.Data
         {
             var context = new TasksManagerContext(_connectionString);
 
-            if(title == null)
+            if (title == null || title == "")
             {
                 return;
             }
@@ -39,15 +39,15 @@ namespace Homework67_Tasks.Data
         public void MarkAsDoing(TaskItem taskItem, User user)
         {
             var context = new TasksManagerContext(_connectionString);
-            
-            if(taskItem.Status == TaskStatus.Pending)
+
+            if (taskItem.Status == TaskStatus.Pending)
             {
                 taskItem.Status = TaskStatus.InProcess;
                 taskItem.UserId = user.Id;
                 context.TaskItems.Update(taskItem);
                 context.SaveChanges();
             }
-        } 
+        }
         public void MarkAsDone(TaskItem taskItem)
         {
             var context = new TasksManagerContext(_connectionString);
